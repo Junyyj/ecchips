@@ -73,11 +73,14 @@ const webSiteSchema = {
       <div class="container header-inner">
         <a class="brand" href="/">
           <span class="brand-name">ECCHIPS</span>
-          <span class="brand-sub">Electronic Component Intelligence</span>
+          <span class="brand-sub" data-i18n="brand_sub">Electronic Component Intelligence</span>
         </a>
-        <nav class="site-nav" aria-label="Main navigation">
-          <a href="/about">About</a>
-        </nav>
+        <div class="header-actions">
+          <select id="lang-select" class="lang-select" aria-label="Language"></select>
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="/about" data-i18n="nav_about">About</a>
+          </nav>
+        </div>
       </div>
     </header>
 
@@ -88,19 +91,24 @@ const webSiteSchema = {
     <footer class="site-footer">
       <div class="container footer-inner">
         <p class="footer-trust">
-          <span>Built for engineers.</span>
+          <span data-i18n="trust_built">Built for engineers.</span>
           <span aria-hidden="true">·</span>
-          <span>No account required.</span>
+          <span data-i18n="trust_no_account">No account required.</span>
           <span aria-hidden="true">·</span>
-          <span>Runs locally in your browser.</span>
+          <span data-i18n="trust_local">Runs locally in your browser.</span>
         </p>
-        <p class="footer-brand">© {year} ECCHIPS. Electronic Component Intelligence.</p>
+        <p class="footer-brand">© {year} ECCHIPS. <span data-i18n="brand_sub">Electronic Component Intelligence</span>.</p>
         <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/privacy">Privacy</a>
+          <a href="/" data-i18n="footer_home">Home</a>
+          <a href="/about" data-i18n="nav_about">About</a>
+          <a href="/privacy" data-i18n="footer_privacy">Privacy</a>
         </nav>
       </div>
     </footer>
+
+    <script>
+      import { initI18n } from '../scripts/i18n.js';
+      initI18n();
+    </script>
   </body>
 </html>

@@ -6,16 +6,19 @@
  * ========================================================================= */
 
 import { decodeSmdCode } from './smdDecoder.js';
+import { t } from './i18n.js';
 
 const HISTORY_KEY = 'ecchips_smd_history';
 const HISTORY_MAX = 10;
 
-/* Error messages — frozen copy (exact wording). */
-const ERROR_MESSAGES = {
-  empty: 'Please enter an SMD marking.',
-  format: 'Unsupported SMD code format. Please check your input.',
-  'eia96-not-found': 'This code is not recognized in the supported EIA-96 reference table.'
-};
+/* Track the last render so we can re-render it when the language changes. */
+let lastRender = null;
+
+function errorMessage(error) {
+  if (error === 'empty') return t('err_empty');
+  if (error === 'eia96-not-found') return t('err_eia96');
+  return t('err_format');
+}
 
 function ready(fn) {
   if (document.readyState !== 'loading') fn();
@@ -105,14 +108,14 @@ function renderResult(result) {
 
   if (result.format === '3-digit') {
     body = `
-      <p class="result-warning" role="note">Important: The marking alone does not identify the component type.</p>
+      <p class="result-warning" role="note">${escapeHtml(t('warning_marking'))}</p>
       <dl class="result-list">
         <div class="result-row">
-          <dt>Resistor Interpretation</dt>
+          <dt>${escapeHtml(t('label_resistor_interp'))}</dt>
           <dd>${escapeHtml(result.resistorValue)}</dd>
         </div>
         <div class="result-row">
-          <dt>Ceramic Capacitor Interpretation</dt>
+          <dt>${escapeHtml(t('label_capacitor_interp'))}</dt>
           <dd>${escapeHtml(result.capacitorValue)} / ${escapeHtml(result.capacitorPicoFarads)}</dd>
         </div>
       </dl>`;
@@ -120,16 +123,16 @@ function renderResult(result) {
     body = `
       <dl class="result-list">
         <div class="result-row">
-          <dt>Resistor</dt>
+          <dt>${escapeHtml(t('label_resistor'))}</dt>
           <dd>${escapeHtml(result.resistorValue)}</dd>
         </div>
       </dl>
-      <p class="result-note">Precision resistor marking</p>`;
+      <p class="result-note">${escapeHtml(t('note_precision'))}</p>`;
   } else if (result.format === 'eia96') {
     body = `
       <dl class="result-list">
         <div class="result-row">
-          <dt>Resistor</dt>
+          <dt>${escapeHtml(t('label_resistor'))}</dt>
           <dd>${escapeHtml(result.resistorValue)}</dd>
         </div>
       </dl>
@@ -140,16 +143,16 @@ function renderResult(result) {
     <div class="result-panel">
       <p class="result-code" dir="ltr">${escapeHtml(result.code)}</p>
       ${body}
-      <button type="button" class="btn btn-copy" id="copy-btn">Copy Result</button>
+      <button type="button" class="btn btn-copy" id="copy-btn">${escapeHtml(t('copy'))}</button>
     </div>`;
 
   const copyBtn = area.querySelector('#copy-btn');
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       copyToClipboard(copyText);
-      copyBtn.textContent = 'Copied';
+      copyBtn.textContent = t('copied');
       setTimeout(() => {
-        copyBtn.textContent = 'Copy Result';
+        copyBtn.textContent = t('copy');
       }, 1500);
     });
   }
@@ -158,7 +161,7 @@ function renderResult(result) {
 function renderError(error) {
   const area = document.getElementById('result-area');
   if (!area) return;
-  const message = ERROR_MESSAGES[error] || ERROR_MESSAGES.format;
+  const message = errorMessage(error);
   area.innerHTML = `<p class="error" role="alert">${escapeHtml(message)}</p>`;
 }
 
@@ -235,9 +238,11 @@ function performLookup() {
   const result = decodeSmdCode(input.value);
 
   if (result.ok) {
+    lastRender = { kind: 'result', value: result };
     renderResult(result);
     addToHistory(result.code);
   } else {
+    lastRender = { kind: 'error', value: result.error };
     renderError(result.error);
   }
 }
@@ -254,6 +259,16 @@ export function initLookup() {
 
     const clearBtn = document.getElementById('clear-history');
     if (clearBtn) clearBtn.addEventListener('click', clearHistory);
+
+    // Re-render the dynamic result/error when the language changes.
+    window.__onLanguageChange = () => {
+      if (!lastRender) return;
+      if (lastRender.kind === 'result') {
+        renderResult(lastRender.value);
+      } else {
+        renderError(lastRender.value);
+      }
+    };
 
     renderHistory();
   });

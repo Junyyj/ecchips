@@ -6,7 +6,7 @@
 <section class="lookup" aria-label="SMD code lookup">
   <div class="container">
     <form id="smd-lookup-form" autocomplete="off" novalidate>
-      <label class="sr-only" for="smd-code-input">Enter SMD code</label>
+      <label class="sr-only" for="smd-code-input" data-i18n="input_label">Enter SMD code</label>
       <div class="input-row">
         <input
           type="text"
@@ -16,8 +16,9 @@
           autocomplete="off"
           autocapitalize="characters"
           spellcheck="false"
+          data-i18n-placeholder="placeholder"
         />
-        <button type="submit" class="btn btn-primary">Decode</button>
+        <button type="submit" class="btn btn-primary" data-i18n="decode">Decode</button>
       </div>
     </form>
 
