@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Astro
+.astro/
+
+# npm cache (local development)
+npm-cache/
+.npm-cache/
+
+# OS / editor
+.DS_Store
+*.log

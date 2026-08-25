@@ -1,0 +1,46 @@
+---
+// Technical reference: how the three code formats work. Cautious wording —
+// "commonly used convention", never "all manufacturers must follow".
+---
+
+<section class="code-explainer" aria-labelledby="codes-title">
+  <div class="container">
+    <h2 id="codes-title">How the codes work</h2>
+
+    <div class="code-types">
+      <article>
+        <h3>3-Digit Code</h3>
+        <p>
+          The first two digits are the significant value and the third digit is the
+          multiplier (a power of 10). This format is commonly used for both
+          resistors and ceramic capacitors.
+        </p>
+        <p class="code-example" dir="ltr">103 = 10 × 10³ → 10 kΩ or 10 nF</p>
+      </article>
+
+      <article>
+        <h3>4-Digit Code</h3>
+        <p>
+          The first three digits are the significant value and the fourth digit is
+          the multiplier. This format is commonly used for precision resistors.
+        </p>
+        <p class="code-example" dir="ltr">1002 = 100 × 10² → 10 kΩ</p>
+      </article>
+
+      <article>
+        <h3>EIA-96 Code</h3>
+        <p>
+          Two digits plus one letter. The digits index a standard value table and
+          the letter sets the multiplier. This format is commonly used for 1%
+          tolerance resistors.
+        </p>
+        <p class="code-example" dir="ltr">01C = 100 × 100 → 10 kΩ</p>
+      </article>
+    </div>
+
+    <p class="code-note">
+      These are commonly used marking conventions, not universal rules. Always
+      cross-check against the component's datasheet when one is available.
+    </p>
+  </div>
+</section>

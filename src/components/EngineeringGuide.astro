@@ -1,0 +1,66 @@
+---
+// Professional explanatory content: why a marking is ambiguous, and how to
+// identify the actual component. Accurate, cautious wording — no fabricated
+// standards, no keyword stuffing.
+---
+
+<section class="engineering-guide" aria-labelledby="guide-why">
+  <div class="container">
+    <h2 id="guide-why">Why can the same SMD code mean different things?</h2>
+    <p>
+      A three-digit marking is a compact way to encode a value, but it is used by
+      more than one kind of component. A resistor reads the code as resistance in
+      ohms; a ceramic capacitor reads the same three digits as capacitance in
+      picofarads.
+    </p>
+
+    <div class="example-block">
+      <p class="example-code" dir="ltr">103</p>
+      <dl class="example-values">
+        <div class="example-row">
+          <dt>Resistor</dt>
+          <dd>10 kΩ</dd>
+        </div>
+        <div class="example-row">
+          <dt>Ceramic capacitor</dt>
+          <dd>10 nF</dd>
+        </div>
+      </dl>
+    </div>
+
+    <p>
+      Because both readings are valid, the marking alone does not tell you which
+      component you are looking at. You need additional context to decide.
+    </p>
+
+    <h2>How to identify the actual component</h2>
+    <ol class="steps">
+      <li>
+        <strong>Component appearance</strong> — resistors and ceramic capacitors
+        usually look different. Resistors are commonly flat and dark; ceramic
+        capacitors are commonly a lighter tan or brown. Appearance is only a first
+        hint.
+      </li>
+      <li>
+        <strong>Package / physical size</strong> — note the part's footprint (for
+        example 0402, 0603, 0805) and its thickness. This narrows the possibilities
+        but does not confirm them.
+      </li>
+      <li>
+        <strong>Circuit location</strong> — where the part sits is often the
+        strongest clue. A capacitor next to a power pin is likely a decoupling
+        capacitor; a resistor in series with a signal line is likely a series
+        resistor.
+      </li>
+      <li>
+        <strong>Multimeter measurement</strong> — measure it. A multimeter in
+        resistance mode confirms a resistor; a capacitance meter confirms a
+        capacitor.
+      </li>
+    </ol>
+
+    <p class="guide-principle">
+      Never identify a component by its SMD marking alone. Decode first, then verify.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+// Lookup form + result container. The decode/render logic is wired via
+// scripts/smd-lookup.js (imported below as a bundled client script).
+---
+
+<section class="lookup" aria-label="SMD code lookup">
+  <div class="container">
+    <form id="smd-lookup-form" autocomplete="off" novalidate>
+      <label class="sr-only" for="smd-code-input">Enter SMD code</label>
+      <div class="input-row">
+        <input
+          type="text"
+          id="smd-code-input"
+          name="code"
+          placeholder="Enter SMD code, e.g. 103, 1002, or 01C"
+          autocomplete="off"
+          autocapitalize="characters"
+          spellcheck="false"
+        />
+        <button type="submit" class="btn btn-primary">Decode</button>
+      </div>
+    </form>
+
+    <div id="result-area" class="result-area" aria-live="polite"></div>
+  </div>
+</section>
+
+<script>
+  import { initLookup } from '../scripts/smd-lookup.js';
+  initLookup();
+</script>

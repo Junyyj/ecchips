@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogType?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = '',
+  canonical = '',
+  ogType = 'website',
+  jsonLd = []
+} = Astro.props;
+
+const SITE = 'https://ecchips.com';
+const year = new Date().getFullYear();
+const ogImage = `${SITE}/og-image.png`;
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'ECCHIPS',
+  alternateName: 'ECCHIPS SMD Code Lookup',
+  url: SITE,
+  description: 'Electronic Component Intelligence — practical tools for electronics engineers.'
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {canonical && <link rel="canonical" href={`${SITE}${canonical}`} />}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={`${SITE}${canonical}`} />
+    <meta property="og:site_name" content="ECCHIPS" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD: WebSite (global) -->
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+
+    <!-- JSON-LD: page-specific -->
+    {jsonLd.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <span class="brand-name">ECCHIPS</span>
+          <span class="brand-sub">Electronic Component Intelligence</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-trust">
+          <span>Built for engineers.</span>
+          <span aria-hidden="true">·</span>
+          <span>No account required.</span>
+          <span aria-hidden="true">·</span>
+          <span>Runs locally in your browser.</span>
+        </p>
+        <p class="footer-brand">© {year} ECCHIPS. Electronic Component Intelligence.</p>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

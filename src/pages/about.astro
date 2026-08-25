@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'About — ECCHIPS',
+  url: 'https://ecchips.com/about',
+  description: 'About ECCHIPS.',
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://ecchips.com' }
+};
+---
+
+<BaseLayout
+  title="About — ECCHIPS"
+  description="About ECCHIPS."
+  canonical="/about"
+  jsonLd={[webPageSchema]}
+>
+  <section class="page">
+    <div class="container">
+      <h1>About</h1>
+      <p>ECCHIPS is an independent project focused on building practical tools for electronics engineers.</p>
+    </div>
+  </section>
+</BaseLayout>

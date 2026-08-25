@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Privacy — ECCHIPS',
+  url: 'https://ecchips.com/privacy',
+  description: 'ECCHIPS privacy policy.',
+  inLanguage: 'en',
+  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://ecchips.com' }
+};
+---
+
+<BaseLayout
+  title="Privacy — ECCHIPS"
+  description="ECCHIPS privacy policy."
+  canonical="/privacy"
+  jsonLd={[webPageSchema]}
+>
+  <section class="page">
+    <div class="container">
+      <h1>Privacy</h1>
+      <p>No account. No upload. No unnecessary data.</p>
+      <p>SMD code decoding is performed locally in your browser.</p>
+    </div>
+  </section>
+</BaseLayout>

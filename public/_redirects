@@ -1,0 +1,2 @@
+# www → non-www canonical redirect (301)
+https://www.ecchips.com/*  https://ecchips.com/:splat  301
