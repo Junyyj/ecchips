@@ -1,2 +1,8 @@
-# www → non-www canonical redirect (301)
-https://www.ecchips.com/*  https://ecchips.com/:splat  301
+# Bare apex → www canonical redirect (301).
+# Canonical host is https://www.ecchips.com — all canonical tags, the
+# sitemap and robots.txt point there.
+#
+# NOTE: this rule only fires once ecchips.com is attached to this Pages
+# project (or intercepted by a Cloudflare edge Redirect Rule). Until then
+# apex requests never reach this file — see DEPLOY-FIX.md step 1.
+https://ecchips.com/*  https://www.ecchips.com/:splat  301

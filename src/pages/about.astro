@@ -1,27 +1,102 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const pageUrl = 'https://www.ecchips.com/about';
+const pageDescription =
+  'ECCHIPS is an independent, free tool site for electronics engineers. Learn how SMD Code Lookup results are calculated and the principles behind the project.';
+
 const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'About — ECCHIPS',
-  url: 'https://ecchips.com/about',
-  description: 'About ECCHIPS.',
+  url: pageUrl,
+  description: pageDescription,
   inLanguage: 'en',
-  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://ecchips.com' }
+  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com' }
 };
 ---
 
 <BaseLayout
-  title="About — ECCHIPS"
-  description="About ECCHIPS."
+  title="About ECCHIPS – Independent Tools for Electronics Engineers"
+  description={pageDescription}
   canonical="/about"
   jsonLd={[webPageSchema]}
 >
   <section class="page">
     <div class="container">
       <h1>About</h1>
-      <p>ECCHIPS is an independent project focused on building practical tools for electronics engineers.</p>
+
+      <p>
+        ECCHIPS is an independent project that builds small, focused tools for
+        electronics engineers. The first tool is the
+        <a href="/smd-code-lookup">SMD Code Lookup</a>: a fast way to decode
+        common SMD markings into possible resistor or ceramic capacitor values.
+      </p>
+
+      <h2>Current scope</h2>
+      <p>
+        Version 1.0 deliberately does one thing only: decoding three-digit,
+        four-digit and EIA-96 markings. There is no component database, no
+        account system, no backend and no advertising. If a feature does not
+        help you decode a marking faster, it is not in this version.
+      </p>
+
+      <h2>How results are calculated</h2>
+      <p>
+        Results are produced by deterministic marking rules implemented
+        directly by ECCHIPS, computed locally in your browser. ECCHIPS does not
+        copy or resell any third-party parts database, and no query leaves your
+        device. Because the same calculation rules run on every request, the
+        same input always produces the same output.
+      </p>
+
+      <h2>Accuracy principles</h2>
+      <ul>
+        <li>
+          Markings follow commonly used conventions, not universal laws.
+          Descriptions on this site use careful wording for that reason.
+        </li>
+        <li>
+          A three-digit code is reported as ambiguous by design: it may encode
+          a resistor value or a ceramic capacitor value, and the marking alone
+          cannot tell you which.
+        </li>
+        <li>
+          When a code cannot be decoded under a supported rule, the tool says
+          so instead of guessing.
+        </li>
+        <li>
+          Always confirm against the component's datasheet and your own
+          measurements before relying on a decoded value in real hardware.
+        </li>
+      </ul>
+
+      <h2>Independence and limitations</h2>
+      <p>
+        ECCHIPS is not affiliated with any component manufacturer or
+        distributor. It is an educational reference tool: it interprets
+        markings, it does not identify individual physical components, verify
+        authenticity, or guarantee tolerance ratings.
+      </p>
+
+      <h2>Privacy</h2>
+      <p>
+        No account, no upload, no tracking by default. Recent lookups are kept
+        only in your browser's local storage. See the
+        <a href="/privacy">Privacy</a> page for details.
+      </p>
+
+      <h2>Roadmap</h2>
+      <p>
+        More single-purpose engineering tools are planned, added one at a time
+        once each proves useful. Suggestions and correction reports from
+        working engineers are the main input for what gets built next.
+      </p>
+
+      {/* TODO(owner): add a real contact channel (email or form) here before launch.
+          Do not publish an address that is not monitored. */}
+
+      <p class="page-updated">Last updated: August 26, 2026</p>
     </div>
   </section>
 </BaseLayout>

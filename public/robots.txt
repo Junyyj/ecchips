@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ecchips.com/sitemap.xml
+Sitemap: https://www.ecchips.com/sitemap.xml
