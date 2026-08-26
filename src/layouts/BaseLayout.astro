@@ -75,12 +75,9 @@ const webSiteSchema = {
           <span class="brand-name">ECCHIPS</span>
           <span class="brand-sub" data-i18n="brand_sub">Electronic Component Intelligence</span>
         </a>
-        <div class="header-actions">
-          <select id="lang-select" class="lang-select" aria-label="Language"></select>
-          <nav class="site-nav" aria-label="Main navigation">
-            <a href="/about/" data-i18n="nav_about">About</a>
-          </nav>
-        </div>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="/about/" data-i18n="nav_about">About</a>
+        </nav>
       </div>
     </header>
 
@@ -105,10 +102,5 @@ const webSiteSchema = {
         </nav>
       </div>
     </footer>
-
-    <script>
-      import { initI18n } from '../scripts/i18n.js';
-      initI18n();
-    </script>
   </body>
 </html>
