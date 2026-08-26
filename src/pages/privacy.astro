@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const pageUrl = 'https://www.ecchips.com/privacy';
+const pageUrl = 'https://www.ecchips.com/privacy/';
 const pageDescription =
   'ECCHIPS collects no personal data and requires no account. See exactly what is stored on your device, what is not collected, and how to remove it.';
 
@@ -12,14 +12,14 @@ const webPageSchema = {
   url: pageUrl,
   description: pageDescription,
   inLanguage: 'en',
-  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com' }
+  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com/' }
 };
 ---
 
 <BaseLayout
   title="Privacy Policy — ECCHIPS"
   description={pageDescription}
-  canonical="/privacy"
+  canonical="/privacy/"
   jsonLd={[webPageSchema]}
 >
   <section class="page">

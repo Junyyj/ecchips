@@ -52,19 +52,25 @@ Pages 会自动处理 apex→primary 跳转（此时 `_redirects` 作为兜底�
 
 ## 部署后验证（必须逐条执行）
 
+> 注：Cloudflare Pages 会把无尾斜杠 URL 以 308 规范化为带斜杠形式
+> （如 `/about` → `/about/`）。全站 canonical / sitemap / 内部链接已统一
+> 采用带斜杠形态，与实际服务地址一致。
+
 ```bash
-curl -sI https://www.ecchips.com/ | head -3                 # 期望 200
-curl -sI https://ecchips.com/ | head -3                     # 期望 301 → https://www.ecchips.com/
-curl -sI http://ecchips.com/about | head -3                 # 期望 301 → https://www.ecchips.com/about
-curl -s https://www.ecchips.com/ | grep -o 'canonical" href="[^"]*"'
-# 期望 <link rel="canonical" href="https://www.ecchips.com/"/>
+curl -sI https://www.ecchips.com/ | head -3                  # 期望 200
+curl -sI https://www.ecchips.com/about | head -2             # 期望 308 → location: /about/
+curl -sL -o /dev/null -w '%{http_code}\n' https://www.ecchips.com/about/   # 期望 200
+curl -sI https://ecchips.com/ | head -2                      # 控制台步骤完成后期望 301 → https://www.ecchips.com/
+curl -s http://ecchips.com/about/ -o /dev/null -w '%{http_code} %{redirect_url}\n'  # 期望经 www 301 到位
+curl -s https://www.ecchips.com/smd-code-lookup/ | grep -o 'canonical" href="[^"]*"'
+# 期望 <link rel="canonical" href="https://www.ecchips.com/smd-code-lookup/"/>
 ```
 
 ## Search Console
 
 1. 验证 `https://www.ecchips.com` 这个 property（Domain property 最省事）。
 2. 提交 sitemap：`https://www.ecchips.com/sitemap.xml`。
-3. 用 URL Inspection 对 `/smd-code-lookup` 请求编入索引。
+3. 用 URL Inspection 对 `/smd-code-lookup/` 请求编入索引。
 
 ## 备注：以后想换回 apex 作规范域名？
 

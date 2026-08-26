@@ -7,7 +7,7 @@ import EngineeringGuide from '../components/EngineeringGuide.astro';
 import CodeExplainer from '../components/CodeExplainer.astro';
 import FAQSection from '../components/FAQSection.astro';
 
-const pageUrl = 'https://www.ecchips.com/smd-code-lookup';
+const pageUrl = 'https://www.ecchips.com/smd-code-lookup/';
 const pageDescription =
   'Decode common 3-digit, 4-digit and EIA-96 SMD markings. Get resistor and ceramic capacitor interpretations instantly with ECCHIPS.';
 
@@ -18,7 +18,7 @@ const webPageSchema = {
   url: pageUrl,
   description: pageDescription,
   inLanguage: 'en',
-  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com' }
+  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com/' }
 };
 
 const softwareAppSchema = {
@@ -89,7 +89,7 @@ const faqSchema = {
 <BaseLayout
   title="SMD Code Lookup – Identify & Decode SMD Markings | ECCHIPS"
   description={pageDescription}
-  canonical="/smd-code-lookup"
+  canonical="/smd-code-lookup/"
   ogType="website"
   jsonLd={[webPageSchema, softwareAppSchema, faqSchema]}
 >

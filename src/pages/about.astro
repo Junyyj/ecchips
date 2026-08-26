@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const pageUrl = 'https://www.ecchips.com/about';
+const pageUrl = 'https://www.ecchips.com/about/';
 const pageDescription =
   'ECCHIPS is an independent, free tool site for electronics engineers. Learn how SMD Code Lookup results are calculated and the principles behind the project.';
 
@@ -12,14 +12,14 @@ const webPageSchema = {
   url: pageUrl,
   description: pageDescription,
   inLanguage: 'en',
-  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com' }
+  isPartOf: { '@type': 'WebSite', name: 'ECCHIPS', url: 'https://www.ecchips.com/' }
 };
 ---
 
 <BaseLayout
   title="About ECCHIPS – Independent Tools for Electronics Engineers"
   description={pageDescription}
-  canonical="/about"
+  canonical="/about/"
   jsonLd={[webPageSchema]}
 >
   <section class="page">
@@ -29,7 +29,7 @@ const webPageSchema = {
       <p>
         ECCHIPS is an independent project that builds small, focused tools for
         electronics engineers. The first tool is the
-        <a href="/smd-code-lookup">SMD Code Lookup</a>: a fast way to decode
+        <a href="/smd-code-lookup/">SMD Code Lookup</a>: a fast way to decode
         common SMD markings into possible resistor or ceramic capacitor values.
       </p>
 
@@ -83,7 +83,7 @@ const webPageSchema = {
       <p>
         No account, no upload, no tracking by default. Recent lookups are kept
         only in your browser's local storage. See the
-        <a href="/privacy">Privacy</a> page for details.
+        <a href="/privacy/">Privacy</a> page for details.
       </p>
 
       <h2>Roadmap</h2>
